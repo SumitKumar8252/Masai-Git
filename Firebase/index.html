@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase - I</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const fetching= fetch('https://moviedatabase-83171-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json')
+    .then (resolve=> resolve.json())
+    .then(data=> console.log(data))
+</script>
+</html>
