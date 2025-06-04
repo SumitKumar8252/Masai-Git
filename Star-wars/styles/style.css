@@ -1,0 +1,72 @@
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+    color: #ffffff;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+    padding: 20px;
+    margin-top: 1rem;
+}
+
+.gallery{
+    padding: 20px;
+    
+}
+.card{
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(155, 154, 154, 0);
+    width: 100%;
+    justify-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.card:hover{
+    transform: scale(1.02);
+}
+
+.card img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+}
+
+.card .info{
+    padding: 20px;
+}
+
+.pagination{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button{
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+footer{
+    text-align: center;
+    margin-top: 40px;
+    font-size: 18px;
+    color: #666;
+    background: #222;
+}
