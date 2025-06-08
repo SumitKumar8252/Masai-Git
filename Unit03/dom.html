@@ -3,63 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM</title>
+    <title>Document</title>
+    <script src="./dom.js"></script>
 </head>
+<body>
+    <h1>Task Manager</h1>
+    <div class="first">
+        <input type="text" id="taskInput" placeholder="Enter a new Task">
+        <button id="addTask">Add</button>
+    </div>
+
+
+    <div class="second">
+        <button id="showAllTasks">Show All</button>
+        <button id="showCompletedTasks">Completed Task</button>
+        <button id="showIncompleteTasks">Incompleted Task</button>
+    </div>
+    <ul id="taskList" class="task-list"></ul>
+</body>
+
 <style>
-    #MyForm{
-        background-color: aquamarine;
-        height: auto;
-        padding: 20px;
-        
+    body{
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        justify-items: center;
+    }
+    .task-list{
+        list-style-type: none;
+        padding: 0;
+    }
+    .task-item{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .completed{
+        text-decoration: line-through;
+        color: grey;
+    }
+    .second{
+        margin-top: 20px;
+        background-color: rgb(245, 191, 157);
+        height: 50px;
+        width:fit-content;
+        text-align: center;
+        align-content: center;
+        padding: 0 20px;
     }
 </style>
-<body> 
-    <h1 id="heading">Heading 1</h1>
-    <p class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, alias.</p>
-    <ul>
-        <li>item 1</li>
-        <li>item 2</li>
-        <li>item 3</li>
-    </ul>  
-    <p id="heading2"> Original Heading</p>
-
-    <form id="MyForm">
-        <input type="text" id="name" placeholder="Enter Name">
-        <input type="password" id="password" placeholder="passsword">
-        <button type="submit" onclick="click()">Submit</button>
-    </form>
-</body>
-<script>
-    const head= document.getElementById('heading') 
-    head.textContent='Hellow !'
-
-    const parag= document.getElementsByClassName('paragraph')
-    for(let i=0; i<parag.length; i++){
-        parag[i].style.color='red'
-    }
-
-    const listName= document.querySelectorAll('li') 
-    listName.forEach((items)=>{
-        items.style.backgroundColor= 'lightblue'
-    })
-
-    const heading= document.getElementById('heading2')
-    heading.innerHTML="<p> This is a <strong> dynamic </strong> para heading </p>"
-    
-    const form= document.getElementById('MyForm')
-    const nameInput= document.getElementById('name')
-    const passwordInput= document.getElementById('password')
-
-    form.addEventListener('submit', function(event){
-        if(nameInput.value===''){
-            event.preventDefault(); //prevent form for submitting
-            alert("Please fill the name section.")
-        }
-        else if(passwordInput.value===''){
-            event.preventDefault();
-            alert('Please fill the password section.')
-        }
-    });
-
-</script>
 </html>
