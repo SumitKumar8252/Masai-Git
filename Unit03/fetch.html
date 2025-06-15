@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fetch</title>
-</head>
-<body>
-    <h1>Promise</h1>
-</body>
-<script>
-   async function FetchProducts(){
-    try{
-        let fetching= await fetch('https://fakestoreapi.com/products')
-        let products= await fetching.json()
-        <!-- console.log(products) -->
-        let filtering= products.filter((product)=> product.price>=150)
-        console.log(filtering)
-
-    }catch(error){
-        console.log(error)
+  </head>
+  <style>
+    #productContainer{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
     }
-   }
+    #productContainer> div{
+        border: 2px black solid;
+        text-align: center;
+        padding: 15px;
+    }
+    img{
+        max-width: 100%;
+    }
+  </style>
+  <body>
+    <h1>Promise</h1>
+    <div id="productContainer"></div>
+  </body>
+  <script>
+    async function fetchData() {
+      try {
+        let fetching = await fetch("https://fakestoreapi.com/products");
+        let products = await fetching.json();
+        console.log(products);
 
-   FetchProducts()
-</script>
+        let container = document.getElementById("productContainer");
+
+        products.forEach((product) => {
+          let productBox = document.createElement("div");
+
+          productBox.innerHTML = `
+            <h4>${product.title}</h4>
+            <img src="${product.image}" alt="">
+            <p>${product.price}</p>
+          `;
+          container.appendChild(productBox);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchData();
+  </script>
 </html>
