@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Firebase - I</title>
-</head>
-<body>
-    
-</body>
-<script>
-    const fetching= fetch('https://moviedatabase-83171-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json')
-    .then (resolve=> resolve.json())
-    .then(data=> console.log(data))
-</script>
+  </head>
+  <body>
+    <h1>Movies Collection</h1>
+  </body>
+  <script>
+    async function fetchMovies() {
+     let res= await fetch('https://moviedatabase-83171-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json')
+     let movies= await res.json()
+
+     let moviesArray= Object.entries(movies) //passing fetched data
+
+     console.log(moviesArray)
+    }
+
+    fetchMovies()
+  </script>
 </html>
