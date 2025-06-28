@@ -6,27 +6,32 @@
     <title>Fetch</title>
   </head>
   <style>
-    #productContainer{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+    #productContainer {
+      padding-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
-    #productContainer> div{
-        border: 2px black solid;
-        text-align: center;
-        padding: 15px;
+    #productContainer > div {
+      border: 2px black solid;
+      text-align: center;
+      padding: 15px;
     }
-    img{
-        max-width: 100%;
+    img {
+      max-width: 100%;
     }
   </style>
-  <body>
+  <body onload="fetchData()">
     <h1>Promise</h1>
+    <!-- <button id="btn" onclick="fetchData()">Fetch Products</button> -->
     <div id="productContainer"></div>
   </body>
   <script>
     async function fetchData() {
       try {
+        //var button = document.getElementById("btn"); -->
+        //button.disabled = true;
+
         let fetching = await fetch("https://fakestoreapi.com/products");
         let products = await fetching.json();
         console.log(products);
@@ -44,10 +49,10 @@
           container.appendChild(productBox);
         });
       } catch (err) {
-        console.log(err);
+        alert("Failed to fetch Products");
+      }finally{
+       // button.disabled= false;
       }
     }
-
-    fetchData();
   </script>
 </html>
