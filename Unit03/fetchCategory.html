@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch Products</title>
+  </head>
+  <style>
+    #productContainer {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 10px;
+    }
+    #productContainer > div {
+      border: 1.2px solid black;
+      border-radius: 12px;
+      padding: 10px;
+      align-items: center;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+    }
+  </style>
+  <body onload="fetchProducts()">
+    <h1>Amazon</h1>
+    <select name="" id="selectProduct">
+      <option value="all">All Products</option>
+      <option value="men's clothing">Men's Wear</option>
+      <option value="women's clothing">Women's Wear</option>
+      <option value="jewelery">Jewelery</option>
+      <option value="electronics">Electronics</option>
+    </select>
+    <div id="productContainer"></div>
+  </body>
+</html>
+<script>
+  async function fetchProducts() {
+    try {
+      let fetching = await fetch("https://fakestoreapi.com/products");
+      let data = await fetching.json();
+      //console.log(data);
+
+      let selectedCategory = document.getElementById("selectProduct").value;
+
+      let filtered =
+        selectedCategory == "all"
+          ? data
+          : data.filter((product) => product.category == selectedCategory);
+
+      console.log(filtered);
+
+      let container = document.getElementById("productContainer");
+      container.innerHTML = "";
+
+      data.forEach((product) => {
+        let productBox = document.createElement("div");
+        productBox.innerHTML = `
+          <h4>${product.title}</h>
+          <img src="${product.image}" alt="">
+          <p>${product.price}</p>
+        `;
+        container.appendChild(productBox)
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+</script>
