@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storage</title>
+  </head>
+  <body>
+    <h1>Local Storage</h1>
+    <input type="text" id="todoInput" placeholder="Enter your tasks" />
+    <button onclick="addTodo()">Add Todo</button>
+    <button onclick="clearAll()">Clear Todo</button>
+    <ul id="todoList"></ul>
+  </body>
+</html>
+<script>
+  function addTodo() {
+    let todoInput = document.getElementById("todoInput").value;
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.push(todoInput);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+
+    displayData()
+  }
+  function displayData(){
+    let tasks= JSON.parse(localStorage.getItem('tasks'))
+    let todoList= document.getElementById('todoList')
+    todoList.innerHTML=""
+
+    tasks.forEach((task)=>{
+        let li= document.createElement('li')
+        li.innerText=task
+
+        todoList.appendChild(li)
+    });
+  }
+  function clearAll(){
+    
+  }
+</script>
+<!-- 
+*  to convert into JSON -> (JSON.stringify())
+*  to convert back to readable format -> (JSON.parse(localeStorage.getItem('useName')))
+
+1. localStorage.getItem()
+2. localStorage.setItem()
+3. localStorage.removeItem()
+4. localStorage.clear()
+-->

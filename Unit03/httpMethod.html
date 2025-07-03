@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HTTP Method</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>HTTP Methods</h1>
-</body>
+    <input
+      type="text"
+      id="productInput"
+      placeholder="Enter you product name.."
+    />
+    <button onclick="fetchData()">Search</button>
+    <div id="productContainer"></div>
+  </body>
 </html>
 
 <script>
-    fetch('https://fakestoreapi.com/products/')
-     .then((res)=>res.json())
-     .then ((data)=> console.log(data))
-     
+  async function fetchData() {
+    let searchQuery = document.getElementById("productInput").value.toLowerCase();
+
+    try {
+      let response = await fetch("https://fakestoreapi.com/products");
+      let data = await response.json();
+
+      let filterProduct= data.filter((product)=>{
+       return product.title.toLowerCase().includes(searchQuery);
+      });
+
+      console.log(filterProduct);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  fetchData();
 </script>
