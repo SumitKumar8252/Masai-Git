@@ -1,56 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./dom.js"></script>
-</head>
-<body>
-    <h1>Task Manager</h1>
-    <div class="first">
-        <input type="text" id="taskInput" placeholder="Enter a new Task">
-        <button id="addTask">Add</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intro to DOM</title>
+  </head>
+  <body>
+    <h1>DOM Manipulation</h1>
+    <div id="container">
+      <ul>
+        Item 1
+      </ul>
+      <ul>
+        Item 2
+      </ul>
+      <ul>
+        Item 3
+      </ul>
+      <ul>
+        Item 4
+      </ul>
     </div>
 
-
-    <div class="second">
-        <button id="showAllTasks">Show All</button>
-        <button id="showCompletedTasks">Completed Task</button>
-        <button id="showIncompleteTasks">Incompleted Task</button>
-    </div>
-    <ul id="taskList" class="task-list"></ul>
-</body>
-
-<style>
-    body{
-        font-family: 'Times New Roman', Times, serif;
-        margin: 0;
-        padding: 0;
-        align-items: center;
-        justify-items: center;
-    }
-    .task-list{
-        list-style-type: none;
-        padding: 0;
-    }
-    .task-item{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-    .completed{
-        text-decoration: line-through;
-        color: grey;
-    }
-    .second{
-        margin-top: 20px;
-        background-color: rgb(245, 191, 157);
-        height: 50px;
-        width:fit-content;
-        text-align: center;
-        align-content: center;
-        padding: 0 20px;
-    }
-</style>
+    <button id="changeColor">change color</button>
+    <button id="alertHere">Alert !</button>
+    <br><br>
+    <div id="edit"></div>
+<br>
+    <button id="toggle-Btn">Show/Hide Paragraph</button>
+    <p id="paragraph" style="display: block;">This a  toggle paragraph</p>
+  </body>
 </html>
+<script>
+  const div = document.getElementById("container");
+  const list = document.querySelectorAll("ul");
+
+  div.style.backgroundColor = "lightgrey";
+  list.forEach((item) => {
+    item.style.fontWeight = "bold";
+    item.style.fontSize = "20px";
+  });
+  let edit= document.getElementById('edit')
+  edit.innerHTML=`
+    <h1><span id="changeMe">Hello</span> world </h1>
+  `
+  edit.style.width='200px'
+  edit.style.backgroundColor='lightGrey'
+  edit.style.border= '2px solid black'
+  edit.style.padding= '20px'
+  edit.style.textAlign='center'
+
+  const changeColor= document.getElementById('changeColor')
+  changeColor.addEventListener('click', ()=>{
+    const span= document.getElementById('changeMe')
+    span.style.color='red'
+  })
+  const alertMe=document.getElementById('alertHere')
+  alertMe.addEventListener("dblclick", ()=>{
+    alert("Clicked !!")
+  }) 
+
+  const toggleBtn = document.getElementById('toggle-Btn') 
+  const togglePara= document.getElementById('paragraph')
+
+  toggleBtn.addEventListener('click', function(){
+    if(togglePara.style.display== 'none'){
+        togglePara.style.display='block'
+    }else{
+        togglePara.style.display= 'none'
+    }
+  })
+
+</script>
