@@ -15,30 +15,23 @@ A JavaScript web application displaying Rick and Morty characters using the Rick
 ## Live Demo
 
 
-## 📸 Screenshots
+## Screenshots
 - Main page showing character grid
-- Detail page with character information
 
 *(Add screenshots here)*
 
-## 📦 Setup Instructions
-1️⃣ Clone the repository:
-```bash
-git clone <your-repo-link>
-cd rick-and-morty-encyclopedia
-```
 
-2️⃣ Open `index.html` in your browser.
+Open `index.html` in your browser.
 
-OR deploy using Netlify, Vercel, or GitHub Pages for a live link.
+deploy using Vercel for a live link.
 
-## ⚡ Challenges Faced
+## Challenges Faced
 - Structuring API calls and managing pagination cleanly
 - Handling dynamic routing for character detail pages
 - Implementing a live clock with clean time formatting
 - Ensuring responsiveness across devices
 
-## ✨ Learnings
+## Learnings
 - Practiced clean vanilla JS API handling
 - DOM manipulation and event handling for dynamic page updates
 - Structuring small frontend projects for clean GitHub deployment
