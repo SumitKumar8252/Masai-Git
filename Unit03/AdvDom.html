@@ -3,33 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Adv. DOM</title>
 </head>
+<style>
+    body{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: 12px;
+    }
+    .task-list{
+        list-style-type: none;
+        padding: 0;
+    }
+    .task-item{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    .completed{
+        text-decoration: line-through;
+        color: grey;
+    }
+</style>
 <body>
-    <button onclick="generateList()">Generate List</button>
-    <ul id="list-items"></ul>
-    <br>
-    <input type="text" placeholder="Type here.. " id="listInput" oninput="updateText(event)">
-    <p id="dynamicP"></p>
+    <h1>Task Manager</h1>
 
+    <div>
+        <input type="text" id="taskInput" placeholder="Enter a new Task">
+        <button id="addTaskBtn">Add Task</button>
+    </div>
+
+    <div>
+        <button id="showAll">Show All Tasks</button>
+        <button id="showCompletedTask">Show Completed</button>
+        <button id="showIncompletedTask">Show Incompleted</button>
+    </div>
+
+    <ul id="taskList" class="task-list"></ul>
 </body>
 </html>
+
 <script>
-   let lists= ['Apple','Kiwi', 'Mango','Banana','Grapes']
-   
-   function generateList(){
-    let listContainer= document.getElementById('list-items')
-    listContainer.innerHTML=""
-    lists.forEach(elem=>{
-        let li= document.createElement('li')
-        li.innerText= elem
+    const taskInput= document.getElementById('taskInput')
+    const addTaskBtn= document.getElementById('addTaskBtn')
+    const showAll= document.getElementById('showAll')
+    const showCompletedTask= document.getElementById('showCompletedTask')
+    const showIncompletedTask= document.getElementById('showIncompletedTask')
+    const taskList= document.getElementById('taskList')
 
-        listContainer.appendChild(li)
+    let tasks= [];
+
+    addTaskBtn.addEventListener('click', ()=>{
+        const taskText= taskInput.value;
+
+        if(taskText !==''){
+            const newTask= {text: taskText, completed:false}
+            tasks.push(newTask)
+            renderUI(tasks)
+            taskInput.value=''
+        }
     })
-   }
 
-   function  updateText(event){
-    console.log(event.target.value)
-    document.getElementById('dynamicP').innerText= event.target.value
-   }
+    function renderUI(taskArr){
+        taskArr.map((tasks, index)=>{
+            const li= document.createElement('li')
+            li.className('task-item')
+
+            li.innerHTML=`
+            <span> cl
+            `
+        })
+    }
+   
 </script>

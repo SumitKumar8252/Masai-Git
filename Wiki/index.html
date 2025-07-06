@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rick and Morty Encyclopedia</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      background: #f9f9f9;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 0.5rem;
+      background: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid" id="characterGrid"></div>
+  <div class="pagination">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+  </div>
+  <footer id="footerClock"></footer>
+
+  <script>
+    let currentPage = 1;
+    const characterGrid = document.getElementById('characterGrid');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    async function fetchCharacters(page) {
+      const res = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
+      const data = await res.json();
+      characterGrid.innerHTML = '';
+      data.results.forEach(char => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${char.image}" alt="${char.name}" />
+          <h3>${char.name}</h3>
+          <p>Species: ${char.species}</p>
+          <p>Status: ${char.status}</p>
+        `;
+        card.addEventListener('click', () => {
+          window.open(`detail.html?id=${char.id}`, '_blank');
+        });
+        characterGrid.appendChild(card);
+      });
+      prevBtn.disabled = !data.info.prev;
+      nextBtn.disabled = !data.info.next;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        fetchCharacters(currentPage);
+      }
+    });
+    nextBtn.addEventListener('click', () => {
+      currentPage++;
+      fetchCharacters(currentPage);
+    });
+
+    function updateClock() {
+      const now = new Date();
+      const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+      const time = now.toLocaleTimeString('en-US', { hour12: false });
+      const date = now.toLocaleDateString('en-US', options);
+      document.getElementById('footerClock').textContent = `${time} ${date}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    fetchCharacters(currentPage);
+  </script>
+</body>
+</html>

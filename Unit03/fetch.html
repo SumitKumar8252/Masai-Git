@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="filterCategory()">
+    <h1>Filter </h1>
+    <select id="filter" onchange="filterCategory()">
+        <option value="all">All</option>
+        <option value="men's clothing">Men's Clothing</option>
+        <option value="jwellery">Jwellery</option>
+    </select>
+
+    <div id="productContainer"></div>
+  </body>
+</html>
+<script>
+async function filterCategory(){
+let res= await fetch('https://fakestoreapi.com/products')
+let data= await res.json()
+
+let selectedCategory= document.getElementById('filter').value
+let filteredProduct= selectedCategory==='all'? data:data.filter(()=>{})
+}
+
+</script>
