@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagination</title>
+  </head>
+  <style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+
+  #itemList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+
+  #itemList li {
+    background: #ecf0f1;
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+
+  #itemList li:hover {
+    background: #d0d7de;
+  }
+
+  #pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #pagination button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+
+  #pagination button:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+  }
+
+  #pagination button:hover:not(:disabled) {
+    background: #2980b9;
+  }
+
+  #currentPage {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+    
+  </style>
+ <body>
+    <h1>Pagination</h1>
+    <div class="container">
+    <ul id="itemList"></ul>
+
+    <div id="pagination">
+      <button id="prevBtn">Prev</button>
+      <span id="currentPage">1</span>
+      <button id="nextBtn">Next</button>
+    </div>
+    </div>
+
+    <script>
+      const itemList = document.getElementById("itemList");
+      const prevBtn = document.getElementById("prevBtn");
+      const currSpan = document.getElementById("currentPage");
+      const nextBtn = document.getElementById("nextBtn");
+
+      let currentPage = 1;
+      const itemsPerPage = 10;
+      let totalPages = 1;
+      let dataArray = [];
+
+      async function fetchData() {
+        try {
+          let res = await fetch(
+            "https://dashboard-7a7b1-default-rtdb.asia-southeast1.firebasedatabase.app/.json"
+          );
+          let data = await res.json();
+
+          // Flatten Firebase data object into array
+        dataArray = Object.values(data);
+
+          totalPages = Math.ceil(dataArray.length / itemsPerPage);
+          renderPage();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      //render part
+      function renderPage() {
+        itemList.innerHTML = "";
+
+        let startIndex = (currentPage - 1) * itemsPerPage;
+        let endIndex = startIndex + itemsPerPage;
+        let itemsToShow = dataArray.slice(startIndex, endIndex);
+
+        itemsToShow.forEach(item => {
+          let li = document.createElement("li");
+          li.textContent = (item);
+          itemList.appendChild(li);
+        });
+
+        currSpan.textContent = currentPage;
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages;
+      }
+
+//button action
+      prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderPage();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderPage();
+        }
+      });
+
+      fetchData();
+    </script>
+  </body>
+</html>
