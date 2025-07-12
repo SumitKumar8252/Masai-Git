@@ -6,7 +6,12 @@
     <title>LocalStorage</title>
 </head>
 <style>
-   
+   button{
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 15px;
+   }
 </style>
 <body>
     <h1 id="heading">LocalStorage</h1>
@@ -30,9 +35,11 @@
 
         if(currentTheme==='dark'){
             localStorage.setItem('theme', 'light')
+            document.querySelector('#heading').style.color="#333"
             document.body.style.backgroundColor='#fff'
         }else{
             localStorage.setItem('theme','dark')
+            document.querySelector('#heading').style.color="#fff"
             document.body.style.backgroundColor="#333"
         }
     })
