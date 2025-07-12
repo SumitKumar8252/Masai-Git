@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing & Throttling</title>
+</head>
+<body>
+    <input type="text" id="searchBox" placeholder="Type to Search...">
+    <div style="height: 2000px">Scroll down to test Throttling..</div>
+</body>
+<script>
+    //Debounce
+    function debounce (func, delay){
+        let timer;
+        return function (...args){
+            clearTimeout(timer);
+
+            timer= setTimeout(()=>{
+                func.apply(this, args)
+            }, delay);
+        };
+    }
+
+    //Throttle
+    function throttle(func, interval){
+        let lastTime= 0;
+
+        return function (...args){
+            const now= Date.now()
+            if(now - lastTime >= interval){
+                func.apply(this, args)
+                lastTime= now;
+            }
+        };
+    }
+
+    //Debounced search input
+    function handleSearch(e){
+        console.log("Searching for:", e.target.value);
+    }
+    const searchBox= document.getElementById('searchBox')
+    searchBox.addEventListener("input", debounce(handleSearch, 500))
+
+    //Throttled scroll handler
+    function handleScroll(){
+        console.log("Scroll event at:", new Date().toLocaleTimeString());
+    }
+    window.addEventListener('scroll', throttle(handleScroll, 1000));
+</script>
+</html>
