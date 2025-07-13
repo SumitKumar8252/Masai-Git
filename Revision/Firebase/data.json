@@ -1,0 +1,16 @@
+{
+    "movies": {
+        "m1":{
+            "title":"Avenger Infinty War",
+            "year":2018,
+            "genre": "Sci-fi, action",
+            "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imdb.com%2Ftitle%2Ftt4154756%2F&psig=AOvVaw25dqTtWWaW2zfxMgf2Jqr7&ust=1748989057683000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIjq9Y3i040DFQAAAAAdAAAAABAE"
+        },
+        "m2": {
+            "title":"Avenger EndGame",
+            "year":2019,
+            "genre": "Sci-fi, action",
+            "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imdb.com%2Ftitle%2Ftt4154796%2F&psig=AOvVaw3a76q3F_PKbj-ld5z7_WYE&ust=1748989082874000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCOins5ni040DFQAAAAAdAAAAABAE"
+        }
+    }
+}

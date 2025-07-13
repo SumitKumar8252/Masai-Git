@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  async function fetchData() {
+    let res = await fetch(
+      "https://personal-project-26afd-default-rtdb.asia-southeast1.firebasedatabase.app/movies.json"
+    );
+    let movies = await res.json();
+    
+    //change the object of object data into array of object
+    let moviesArr= Object.entries(movies).map(([id, movies])=> ({id, ...movies}))
+    console.log(moviesArr)
+  }
+
+  fetchData();
+</script>

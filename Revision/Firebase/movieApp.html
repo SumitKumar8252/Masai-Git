@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Databse</title>
+  </head>
+  <style>
+    body {
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: rgb(219, 214, 214);
+    }
+    input,
+    button {
+      margin: 10px;
+      padding: 12px;
+    }
+    #movielist {
+      display: grid;
+      grid-template-columns: repeat(2, 200px);
+      gap: 20px;
+      justify-content: center;
+    }
+    .movie-card{
+        background-color: azure;
+        padding: 15px;
+    }
+    .movie-card img{
+        width: 100%;
+
+    }
+  </style>
+  <body>
+    <h1>Firebase Movie Database</h1>
+
+    <input type="text" id="title" placeholder="Title" />
+    <input type="number" id="year" placeholder="Year" />
+    <input type="text" id="genre" placeholder="Gener" />
+    <input type="text" id="image" placeholder="Inage URL" />
+
+    <button onclick="addMovie()">Add Movie</button>
+
+    <h3>Movies List</h3>
+    <div id="movielist"></div>
+   
+  </body>
+</html>
+<script>
+    //addMovie function runs onn the 'onclick' eventListner
+  async function addMovie() {
+    //creating the structure to store data in firebase
+    let movie = {
+      title: document.getElementById("title").value.trim(),
+      year: document.getElementById("year").value.trim(),
+      genre: document.getElementById("genre").value.trim(),
+      image: document.getElementById("image").value.trim(),
+    };
+
+    //fetching the data
+    let res = await fetch(
+      "https://personal-project-26afd-default-rtdb.asia-southeast1.firebasedatabase.app/movie.json",
+      {
+        //using method to post in firebase
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        //boody covert in strigify the movie structure in firebase
+        body: JSON.stringify(movie),
+      }
+    );
+    document.getElementById("title").value ="";
+    document.getElementById("year").value ="";
+    document.getElementById("genre").value ="";
+    document.getElementById("image").value ="";
+  }
+
+  async function fetchMovies(){
+    let res= await fetch('https://personal-project-26afd-default-rtdb.asia-southeast1.firebasedatabase.app/movie.json')
+    let data= await res.json()
+    
+    let movieList= document.getElementById('movielist')
+    movieList.innerHTML=""
+
+    let movieArray= Object.entries(data).map(([id, movie])=> ({id, ...movie}))
+    movieArray.forEach((movie)=>{
+        let movieCard= document.createElement('div')
+        movieCard.className= 'movie-card'
+
+        movieCard.innerHTML=`
+            <img src="${movie.image}" alt="${movie.title}">
+            <h4>${movie.title}</h4>
+            <p>${movie.year}</p>
+            <p>${movie.genre}</p>
+            <button class="delete-btn" onclick="deltemovie('${movie.id}')">Delete</button>
+        `;
+        movieList.appendChild(movieCard)
+    });
+  }
+
+  async function deltemovie(movieId){
+    await fetch(`https://personal-project-26afd-default-rtdb.asia-southeast1.firebasedatabase.app/movie/${movieId}.json`,{
+        method : "DELETE"
+    });
+
+    fetchMovies()
+  }
+
+
+  fetchMovies()
+</script>
