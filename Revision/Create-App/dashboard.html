@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Dashboard</h1>
-    <button id="logout-btn">logout</button>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./css/dashboard.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Welcome, <span id="user-email"></span>(<span id="user-role"></span>)
+      </h1>
+      <button id="logout-btn">logout</button>
+      <div id="notes-container">
+        <h3>Sticky Notes</h3>
+        <textarea
+          id="note-input"
+          placeholder="Write your notes here..."
+        ></textarea>
+        <button id="add-note-btn">Add note</button>
+        <div id="notes-list"></div>
+      </div>
+    </div>
 
     <script type="module" src="./js/auth.js"></script>
-</body>
+    <script type="module" src="./js/dashboard.js"></script>
+  </body>
 </html>

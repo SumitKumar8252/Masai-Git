@@ -6,7 +6,7 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-import {doc, getDoc, setDoc} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+import {doc, getDocs, setDoc} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded',()=>{
     const loginBtn= document.getElementById('login-btn')
